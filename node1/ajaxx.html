@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="hii">hjui</p>
+    <button id="btn"> hi</button>
+</body>
+
+<script>
+    var xhttp = new XMLHttpRequest();
+
+
+    function download (){
+        var filename = "textdaata.txt";
+        xhttp.responseType="blob";
+        xhttp.open("GET", "http://localhost:3000/page2");
+        xhttp.onreadystatechange = () => {
+            if (xhttp.readyState === 4){
+                if (xhttp.status === 200){
+                    var r = new FileReader();
+                    r.readAsArrayBuffer(xhttp.response);
+                    r.addEventListener("click" , () => {
+                        var x = new Int8Array (r.result);
+                        console.log(JSON.stringify(x, null,''))
+                    })
+                }
+            }
+        }
+        xhttp.send()
+    }
+document.getElementById("btn").addEventListener("click", () => {
+    download()
+})
+   
+   // document.getElementById("btn").addEventListener( "click", () => {
+     //   xhttp.open("GET", "http://localhost:3000/page2", true);
+     //   xhttp.send();
+      //  xhttp.onreadystatechange=(e)=>{
+       //     if (xhttp.readyState === 4){
+       //         console.log("wazup")
+        //    }
+      
+      //  }
+       //window.open("http://localhost:3000/page2"); 
+
+   // fetch("http://localhost:3000/page2").then( (response) => {
+    ///    console.log(response);
+    //    console.log("done");
+    //} );
+        
+ //   });
+  
+</script>
+</html>
